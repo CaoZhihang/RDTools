@@ -26,16 +26,28 @@ public class RDTools {
 			System.out.println(key + ":\t" + father.get(key).toString());
 		}
 	}
+	
+	public static void loadConfig(Object source){
+		if (null == source){
+			return;
+		} else if(String.class.equals(source.getClass())){
+			
+		} else if(Configuration.class.equals(source.getClass())){
+			
+		}
+		
+		
+	}
 
 	public static void main(String[] args) {
-//		try {
-//			loadConfig();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			loadConfig();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		Configuration config = new Configuration();
-		System.out.println(Configuration.class.equals(config.getClass()));
+//		Configuration config = new Configuration();
+//		System.out.println(Configuration.class.equals(config.getClass()));
 		
 	}
 
