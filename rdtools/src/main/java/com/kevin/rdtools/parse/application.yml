@@ -1,0 +1,31 @@
+logging:
+  level:
+    root: info
+
+spring:
+  profiles:
+    active: product
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    #hibernate:
+      #naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      #properties:
+        #hibernate:
+          #dialect: org.hibernate.dialect.MySQL5Dialect
+
+#redis通用配置
+redis:
+  maxActive: 200
+  maxIdel: 30
+  maxWait: 30000
+  testOnBorrow: true
+  masterName: mymaster
+  keyExpire: 600
+  password: 123456
