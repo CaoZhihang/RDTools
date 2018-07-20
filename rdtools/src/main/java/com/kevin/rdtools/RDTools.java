@@ -8,6 +8,7 @@ import java.util.Map;
 import org.ho.yaml.Yaml;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.kevin.rdtools.parse.factory.ParserFactory;
 import com.kevin.rdtools.parse.impl.Configuration;
 
 @SpringBootApplication
@@ -19,6 +20,8 @@ public class RDTools {
 		String fileName = RDTools.class.getClassLoader().getResource("application.yml").getPath();
 
 		File dumpFile = new File(fileName);
+		
+		values = ParserFactory.autoParse(fileName);
 
 		Map father = Yaml.loadType(dumpFile, HashMap.class);
 		for (Object key : father.keySet()) {
@@ -28,20 +31,27 @@ public class RDTools {
 	}
 	
 	public static void loadConfig(Object source){
-		if (null == source){
-			return;
-		} else if(String.class.equals(source.getClass())){
-			
-		} else if(Configuration.class.equals(source.getClass())){
-			
-		}
-		
-		
+		values = ParserFactory.autoParse(source);
 	}
 
+	public static Object get(String key){
+		if (null != values){
+			return values.get(key);
+		} else{
+			return null;
+		}
+	}
+	
+	
 	public static void main(String[] args) {
 		try {
 			loadConfig();
+			System.out.println(get("redis.maxActive"));
+			if (null != values){
+				for (Map.Entry<String, Object> entry : values.entrySet()){
+					System.out.println(entry.getKey()+" : "+entry.getValue());
+				}
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
